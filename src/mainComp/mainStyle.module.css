@@ -10,8 +10,8 @@
 
 .pageNum {
     position: absolute;
-    top: 100%; /* Or 'bottom' for bottom corners */
-    left: 15px; /* Or 'left' for left corners */
+    top: 100%;
+    left: 15px; 
 
     margin-top: -30px;
     
@@ -19,8 +19,8 @@
 
 .pageNumRight {
     position: absolute;
-    top: 100%; /* Or 'bottom' for bottom corners */
-    right: 15px; /* Or 'left' for left corners */
+    top: 100%;
+    right: 15px; 
 
     margin-top: -30px;
 }
@@ -85,7 +85,7 @@
     border-radius: 5px;
     border-top-left-radius: 2px;
     border-bottom-left-radius: 15px;
-    z-index: 1; /* Lower z-index */
+    z-index: 1; 
 
     box-shadow: -10px 0 15px -5px rgba(0, 0, 0, 1);
 }
@@ -96,7 +96,7 @@
     left: 50%;
     width: 50%; 
     height: auto; 
-    z-index: 1; /* Lower z-index */
+    z-index: 1; 
 
     border-radius: 5px;
 }
@@ -111,14 +111,12 @@
 
 }
 
-/* ANIMATION PAGE LEFT */
-
 .divAnimation {
     position: absolute;
     top: 58px;
     left: 21px;
 
-    height: 473px;
+    height: 476px;
     width: 798px;
 
     display: grid;
@@ -133,117 +131,3 @@
     
     z-index: 11;
 }
-/* SIDE 1 !!!*/
-.sideOne {
-    
-    width: 50%;
-    height: 50%;
-    position: absolute;
-    
-    
-    transform-origin: right;
-    animation: flip 4s linear;
-    z-index: 10;
-    
-}
-
-
-.imgLeftAni {
-
-    border-radius: 5px;
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 25px;
-
-    position: absolute;
-    width: 100%;
-    z-index: 10;
-}
-
-/* SIDE 2 !!!*/
- .sideTwo {
-    position: absolute;
-    width: 50%;
-    height: 100%;
-
-    left: 50%;
-
-    transform-origin: left;
-    animation: flip2 4s linear;
-    z-index: 10;
-
-}
-
-.rightImg {
-
-    border-radius: 5px;
-
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-} 
-
-.imgRightSecondTry {
-
-    position: absolute;
-    width: 100%;
-    height: 470px;
-
-    
-
-    z-index: 9;
-}
-
-@keyframes flip { 
-    0% {
-        transform: rotateY(0deg);
- 
-    }
-    50% {
-        transform: rotateY(90deg);
-        display: none;
-    }
-    100% {
-        display: none;
-    }
-  }
-
-  
- @keyframes flip2 { 
-    0% {
-        transform: rotateY(90deg);
-    }
-    50% {
-        transform: rotateY(90deg);
-    }
-    100% {
-        transform: rotateY(0deg);
-
-    }
-  } 
-
-/*
-.rotate {
-    animation: rotateAnimation 2s;
-  }
-  
-
-  @keyframes rotateAnimation { /* maybe shadows so it appears more like 3d
-    0% {
-        transform: rotateY(0deg);
-        z-index: 3;
-    }
-    4% {
-        left: 65vh;
-    }
-    100% {
-        transform: rotateY(90deg);
-        left: 84vh;
-        z-index: 3;
-    }
-  } */
-
-  /*
-     left: 64vh;
-  left: 103vh;
-  */

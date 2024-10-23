@@ -7,11 +7,20 @@ import rightPage from "../public/page3.png";
 
 import value from "./info";
 import PageFlip from "./pageFlip";
+import PageFlipBack from "./pageFlipBack";
 
-export default function BookComp() {
-  //
-
+export default function BookComp(props) {
   // page num
+
+  console.log(props.children);
+
+  useEffect(() => {
+
+    
+
+  }, [])
+  
+
   const [pageNum, setPageNum] = useState(0);
 
   // selected pages
@@ -19,9 +28,12 @@ export default function BookComp() {
   const [secondPage, setSecondPage] = useState({});
 
   const [page1Flip, setPage1Flip] = useState([]);
+  const [page2Flip, setPage2Flip] = useState([]);
 
-  const [lastIndex, setLastIndex] = useState(10000); // needs to reset after the animations all stop
+  const [lastIndex, setLastIndex] = useState(1000); // needs to reset after the animations all stop
+  const [lastIndex2, setLastIndex2] = useState(1000); // needs to reset after the animations all stop
 
+  // needs to stop if other animation is called
   function startAnimation() {
     let startIndex = 1001;
     setLastIndex(lastIndex - 1);
@@ -39,28 +51,53 @@ export default function BookComp() {
     ]);
   }
 
+  function startAnimationBack() {
+    let startIndex = 1001;
+    setLastIndex2(lastIndex2 - 1);
+
+    setPage2Flip((prev) => [
+      ...prev,
+      <PageFlipBack
+        key={Math.random()}
+        arr={page2Flip.length}
+        pageNum={pageNum + 1}
+        funToRem={remFirst}
+        lastNum={lastIndex2}
+        zIn={startIndex}
+      />,
+    ]);
+  }
+
   function removeFirstItem() {
     setPage1Flip((prevArray) => prevArray.slice(1));
   }
 
-  useEffect(() => {
-    console.log(page1Flip);
-  }, [page1Flip]);
+  function remFirst() {
+    setPage2Flip((prevArray) => prevArray.slice(1));
+  }
 
   function changePage(operator) {
     if (operator) {
       startAnimation();
       setPageNum(pageNum + 2);
 
-      setFirstPage(value[pageNum + 2]);
+      setSecondPage(value[pageNum + 3]);
 
       setTimeout(() => {
-        setSecondPage(value[pageNum + 3]);
+        setFirstPage(value[pageNum + 2]);
       }, 4000);
     } else {
-      // false do it later
+      startAnimationBack();
       setPageNum(pageNum - 2);
-      // setInfoPages([value[pageNum - 2], value[pageNum - 1 - 2]]);
+
+      setFirstPage(value[pageNum - 2]);
+      setTimeout(() => {
+        if (value[pageNum - 3] === undefined) {
+          setFirstPage(value[0]);
+        } else {
+          setSecondPage(value[pageNum - 1]);
+        }
+      }, 4000);
     }
   }
 
@@ -106,22 +143,27 @@ export default function BookComp() {
         </div>
 
         {/* div for animation */}
-        <div className={c.divAnimation}>{page1Flip}</div>
-
-        {/* end of animation div */}
+        <div className={c.divAnimation}>
+          {page1Flip}
+          {page2Flip}
+        </div>
       </div>
       <div className={c.buttonsDiv}>
         <h2 className={c.num}>{pageNum}</h2>
         <button
           onClick={() => {
-            changePage(false);
+            if (pageNum > 0) {
+              changePage(false);
+            }
           }}
         >
           Prev
         </button>
         <button
           onClick={() => {
-            changePage(true);
+            if (pageNum < value.length - 2) {
+              changePage(true);
+            }
           }}
         >
           Next
@@ -130,4 +172,3 @@ export default function BookComp() {
     </>
   );
 }
-
